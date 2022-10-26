@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="mapper.ProviderMapper">
+
+    <insert id="addProvider">
+        INSERT into smbms_provider
+        values
+            (null,#{proCode},#{proName},#{proDesc},#{proContact},#{proPhone},#{proAddress},#{proFax},#{createdBy},#{creationDate},null,null)
+    </insert>
+    <select id="selectProviderListAndCondition" resultType="pojo.Provider">
+
+        select *
+        from smbms_provider
+        <where>
+            <if test="provider.proCode != null and provider.proCode != ''">
+                and proCode like #{provider.proCode}
+            </if>
+            <if test="provider.proName != null and provider.proName != ''">
+                and proName like #{provider.proName}
+            </if>
+        </where>
+    </select>
+</mapper>

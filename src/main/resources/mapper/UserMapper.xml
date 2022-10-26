@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.UserMapper">
+<!--    <resultMap id="BaseResultMap" type="pojo.User">-->
+<!--        <id property="id" column="id" jdbcType="INTEGER"/>-->
+<!--&lt;!&ndash;        <result property="username" column="username" jdbcType="VARCHAR"/>&ndash;&gt;-->
+<!--&lt;!&ndash;        <result property="password" column="password" jdbcType="VARCHAR"/>&ndash;&gt;-->
+<!--    </resultMap>-->
+    <insert id="addUser" >
+        INSERT into smbms_user(userCode,userName,userPassword,gender,birthday,phone,address,userRole,createdBy,creationDate)
+        values
+        (#{userCode},#{userName},#{userPassword},#{gender},#{birthday},#{phone},#{address},#{userRole},#{createdBy},#{creationDate})
+
+    </insert>
+    <select id="selectByPageAndCondition" resultType="pojo.User">
+        select *
+        from smbms_user
+        <where>
+
+            <if test="user.userName != null and user.userName != ''">
+                and userName like #{user.userName}
+            </if>
+            <if test="user.userRole != null and user.userRole != 0">
+                and userRole = #{user.userRole}
+            </if>
+        </where>
+        limit #{begin} , #{size};
+    </select>
+    <select id="selectTotalCountByCondition" resultType="java.lang.Integer">
+        select count(*)
+        from smbms_user
+        <where>
+            <if test="user.userName != null and user.userName != ''">
+                and userName like #{user.userName}
+            </if>
+            <if test="user.userRole != null and user.userRole != 0">
+                and userRole = #{user.userRole}
+            </if>
+        </where>
+
+    </select>
+
+    <!--    <sql id="Base_Column_List">-->
+<!--        id,username,password-->
+<!--    </sql>-->
+</mapper>
+
+
+
+

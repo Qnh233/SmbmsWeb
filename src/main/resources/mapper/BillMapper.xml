@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.BillMapper">
+
+    <insert id="addBill">
+        insert into smbms_bill
+        values
+            (null,#{billCode},#{productName},null,#{productUnit},#{productCount},#{totalPrice},#{isPayment},#{createdBy},#{creationDate},null,null,#{providerId})
+
+
+    </insert>
+    <select id="selectBillListAndCondition" resultType="pojo.Bill">
+        select *
+        from smbms_bill
+        <where>
+            <if test="bill.productName != null and bill.productName != ''">
+                and productName like #{bill.productName}
+            </if>
+            <if test="bill.providerId != null and bill.providerId != 0">
+                and providerId = #{bill.providerId}
+            </if>
+            <if test="bill.isPayment != null and bill.isPayment != ''">
+                and isPayment = #{bill.isPayment}
+            </if>
+        </where>
+
+    </select>
+</mapper>
