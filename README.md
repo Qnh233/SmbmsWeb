@@ -10,3 +10,4 @@
   ## 有待改进
   1. 前端代码为老式项目前端，主要使用jsp+Jquery+ajax来实现，预想实现基于VUE+element+ajax的美丽前端,后期学习springMVC以及springboot会进行第三阶段改进。
   2. 后端有待优化，使用Mybatis-puls等技术，再将逻辑进行一个深度优化。
+  3. 订单和供应商还未实现分页查找
